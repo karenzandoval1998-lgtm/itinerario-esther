@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Itinerario</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Poiret+One&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+:root{--rose:#d6a1b5;--rose-dark:#98647a;--ink:#654b59;--line:#d8b2c0}
+*{box-sizing:border-box}
+html,body{margin:0;padding:0;background:transparent}
+body{font-family:Montserrat,Arial,sans-serif;color:var(--ink)}
+.itinerary{
+ width:100%;max-width:680px;margin:0 auto;padding:25px 24px;
+ position:relative;overflow:hidden;
+ background:linear-gradient(135deg,rgba(255,250,252,.96),rgba(248,231,238,.94));
+ border:1px solid rgba(224,191,204,.75);
+}
+.itinerary:before,.itinerary:after{
+ content:"";position:absolute;border:1px solid rgba(190,132,156,.13);border-radius:50%;
+ width:180px;height:180px;pointer-events:none
+}
+.itinerary:before{top:-130px;right:-95px}
+.itinerary:after{bottom:-135px;left:-105px}
+.timeline{position:relative;z-index:1}
+.row-event{
+ display:grid;grid-template-columns:minmax(94px, .72fr) 1fr;align-items:center;
+ min-height:91px;position:relative;gap:24px;padding:15px 0;
+}
+.row-event:not(:last-child){border-bottom:1px solid rgba(216,178,192,.55)}
+.time{
+ text-align:right;padding-right:23px;position:relative;
+ font:400 clamp(19px,4.2vw,26px)/1.15 'Poiret One',Georgia,serif;color:#98647a;
+ white-space:nowrap
+}
+.time:after{
+ content:"";position:absolute;right:-5px;top:50%;transform:translateY(-50%);
+ width:7px;height:7px;border-radius:50%;background:#b98199;border:2px solid #fff;
+ box-shadow:0 0 0 1px #d8b2c0
+}
+.event{padding-left:2px}
+.event h2{margin:0;font:400 clamp(24px,5vw,31px)/1.1 'Poiret One',Georgia,serif;color:#67495a}
+.event svg{width:18px;height:18px;stroke:#a36d83;fill:none;stroke-width:1.5;stroke-linecap:round;stroke-linejoin:round;vertical-align:middle;margin-left:7px}
+.timeline-line{
+ position:absolute;left:calc((100% - 24px) * .418);top:30px;bottom:30px;width:1px;
+ background:linear-gradient(to bottom,transparent,var(--line) 12%,var(--line) 88%,transparent);
+ pointer-events:none
+}
+/* Esfera cromada con reflejos y mosaico de espejos; no gira */
+.disco{
+ position:absolute;z-index:3;left:calc((100% - 24px) * .418 - 17px);top:9px;
+ width:35px;height:35px;border-radius:50%;overflow:hidden;
+ background:
+  radial-gradient(ellipse at 28% 18%,rgba(255,255,255,1) 0 3%,rgba(255,255,255,.8) 5%,transparent 24%),
+  radial-gradient(ellipse at 72% 82%,rgba(25,25,35,.55),transparent 34%),
+  radial-gradient(circle at 35% 27%,#fff 0%,#e8e8ed 16%,#85858f 33%,#fdfdff 45%,#aaaab4 59%,#555560 78%,#e7e7ec 90%,#4b4b55 100%);
+ box-shadow:inset -3px -4px 7px rgba(0,0,0,.32),inset 2px 2px 5px rgba(255,255,255,.9),0 3px 8px rgba(72,40,56,.24);
+ transition:top .8s cubic-bezier(.2,.8,.2,1)
+}
+.disco:before{
+ content:"";position:absolute;inset:2px;border-radius:50%;
+ background:
+  repeating-linear-gradient(0deg,transparent 0 5px,rgba(55,55,65,.48) 5px 6px,rgba(255,255,255,.55) 6px 7px),
+  repeating-linear-gradient(90deg,transparent 0 5px,rgba(65,65,75,.5) 5px 6px,rgba(255,255,255,.6) 6px 7px);
+ -webkit-mask-image:radial-gradient(circle,#000 62%,transparent 73%);
+ mask-image:radial-gradient(circle,#000 62%,transparent 73%);
+ opacity:.9
+}
+.disco:after{
+ content:"";position:absolute;left:6px;top:5px;width:9px;height:5px;border-radius:50%;
+ background:rgba(255,255,255,.95);filter:blur(1px);transform:rotate(-35deg)
+}
+@media(max-width:430px){
+ .itinerary{padding:18px 13px}
+ .row-event{grid-template-columns:minmax(83px,.7fr) 1fr;gap:18px;min-height:82px}
+ .time{padding-right:18px;font-size:19px}
+ .event h2{font-size:24px}
+ .timeline-line{left:calc((100% - 13px) * .405)}
+ .disco{left:calc((100% - 13px) * .405 - 16px);width:33px;height:33px}
+}
+@media(prefers-reduced-motion:reduce){.disco{transition:none}}
+</style>
+</head>
+<body>
+<section class="itinerary" aria-label="Itinerario de los XV años">
+ <div class="timeline" id="timeline">
+  <div class="timeline-line" aria-hidden="true"></div>
+  <div class="disco" id="disco" aria-label="Esfera disco cromada"></div>
+  <div class="row-event">
+   <div class="time">7:00 PM</div>
+   <div class="event"><h2>Ceremonia <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3v18M5 7h14M7 7v4a5 5 0 0 0 10 0V7M9 21h6"/></svg></h2></div>
+  </div>
+  <div class="row-event">
+   <div class="time">8:00 PM</div>
+   <div class="event"><h2>Recepción <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 20h18M5 20V9l7-5 7 5v11M9 20v-6h6v6M8 9h.01M12 9h.01M16 9h.01"/></svg></h2></div>
+  </div>
+  <div class="row-event">
+   <div class="time">9:00 PM</div>
+   <div class="event"><h2>Banquete <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 3v7M7 3v7M4 7h3M5.5 10v11M13 3v18M13 3c4 2 5 6 0 8M18 3v18"/></svg></h2></div>
+  </div>
+  <div class="row-event">
+   <div class="time">1:00 AM</div>
+   <div class="event"><h2>Fin del evento <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M3 14l2-5h14l2 5v5H3zM5 19v2M19 19v2M5 14h14"/><circle cx="7" cy="16.5" r="1"/><circle cx="17" cy="16.5" r="1"/></svg></h2></div>
+  </div>
+ </div>
+</section>
+<script>
+(function(){
+ const timeline=document.getElementById('timeline'), ball=document.getElementById('disco');
+ const rows=[...timeline.querySelectorAll('.row-event')];
+ let raf=0;
+ function update(){
+  const base=timeline.getBoundingClientRect(), target=window.innerHeight*.52;
+  let closest=rows[0], best=Infinity;
+  rows.forEach(row=>{const r=row.getBoundingClientRect(), d=Math.abs(r.top+r.height/2-target);if(d<best){best=d;closest=row;}});
+  const r=closest.getBoundingClientRect();
+  ball.style.top=Math.max(0,Math.min(timeline.offsetHeight-ball.offsetHeight,r.top-base.top+r.height/2-ball.offsetHeight/2))+'px';
+ }
+ function schedule(){if(raf)return;raf=requestAnimationFrame(()=>{update();raf=0;});}
+ window.addEventListener('scroll',schedule,{passive:true});
+ window.addEventListener('resize',update);
+ window.addEventListener('load',update);
+ update();
+})();
+</script>
+</body>
+</html>
