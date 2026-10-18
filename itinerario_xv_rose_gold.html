@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Itinerario XV | Escarleth</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#171516;--rose:#dc9ba8;--rose-line:#e5aab5;--gold:#b98578;--paper:#fff}
+*{box-sizing:border-box}
+html,body{margin:0;min-height:100%;background:transparent}
+body{font-family:"Cormorant Garamond",Georgia,serif;color:var(--ink)}
+.wrap{width:min(100%,760px);margin:0 auto;padding:20px 12px 26px;background:var(--paper);overflow:hidden}
+.timeline{position:relative;width:100%;max-width:640px;margin:0 auto}
+.line{position:absolute;left:50%;top:10px;bottom:15px;width:1.5px;transform:translateX(-50%);background:linear-gradient(#e9c2ca,#d98e9d 45%,#e9c2ca)}
+.events{position:relative;display:flex;flex-direction:column}
+.event{position:relative;display:grid;grid-template-columns:minmax(0,1fr) 54px minmax(0,1fr);align-items:center;min-height:112px;opacity:0;animation:fadeIn .75s ease forwards;animation-delay:calc(var(--i)*.12s)}
+.event:nth-child(odd) .iconbox{grid-column:1;justify-self:end;margin-right:18px}
+.event:nth-child(even) .iconbox{grid-column:3;justify-self:start;margin-left:18px}
+.event:nth-child(odd) .copy{grid-column:3;text-align:left;padding-left:13px}
+.event:nth-child(even) .copy{grid-column:1;text-align:right;padding-right:13px}
+.iconbox{grid-row:1;width:76px;height:76px;display:flex;align-items:center;justify-content:center}
+.iconbox svg{width:100%;height:100%;overflow:visible}
+.copy{grid-row:1;z-index:1}
+.name{font-size:clamp(21px,4.2vw,30px);font-weight:400;line-height:1.05;margin:0 0 5px}
+.time{font-size:clamp(17px,3.5vw,23px);font-weight:400;line-height:1.1;margin:0;letter-spacing:.25px}
+.marker{grid-column:2;grid-row:1;justify-self:center;width:11px;height:11px;background:var(--rose);transform:rotate(45deg);z-index:2;box-shadow:0 0 0 4px #fff}
+.disco-runner{position:absolute;left:50%;top:10px;width:58px;height:58px;transform:translate(-50%,-50%);z-index:5;pointer-events:none;filter:drop-shadow(0 4px 5px #a9808033)}
+.disco-runner svg{display:block;width:100%;height:100%}
+.sparkle{position:absolute;color:#d991a1;font-size:16px;animation:twinkle 1.6s ease-in-out infinite alternate}
+.sparkle.a{left:calc(50% - 42px);top:22px}.sparkle.b{left:calc(50% + 28px);top:55px;animation-delay:.5s}.sparkle.c{left:calc(50% - 34px);bottom:30px;animation-delay:.9s}
+@keyframes fadeIn{from{opacity:0;transform:translateY(9px)}to{opacity:1;transform:translateY(0)}}
+@keyframes twinkle{from{opacity:.35;transform:scale(.8)}to{opacity:1;transform:scale(1.15)}}
+@media(max-width:420px){
+ .wrap{padding:12px 4px 20px}
+ .event{grid-template-columns:minmax(0,1fr) 44px minmax(0,1fr);min-height:102px}
+ .iconbox{width:62px;height:62px}
+ .event:nth-child(odd) .iconbox{margin-right:10px}
+ .event:nth-child(even) .iconbox{margin-left:10px}
+ .event:nth-child(odd) .copy{padding-left:7px}
+ .event:nth-child(even) .copy{padding-right:7px}
+ .disco-runner{width:49px;height:49px}
+}
+@media(prefers-reduced-motion:reduce){.event,.sparkle{animation:none;opacity:1}}
+</style>
+</head>
+<body>
+<main class="wrap" aria-label="Itinerario de la celebración">
+ <div class="timeline" id="timeline">
+  <div class="line"></div>
+  <div class="disco-runner" id="disco" aria-hidden="true">
+   <!-- Bola disco rose gold dibujada en SVG: no necesita imagen externa -->
+   <svg viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+    <defs>
+     <radialGradient id="sphere" cx="29%" cy="22%" r="78%">
+      <stop offset="0" stop-color="#fff8f4"/><stop offset=".2" stop-color="#f4d9d3"/>
+      <stop offset=".46" stop-color="#d5a79e"/><stop offset=".68" stop-color="#a97973"/>
+      <stop offset=".84" stop-color="#f5d8d1"/><stop offset="1" stop-color="#9e706b"/>
+     </radialGradient>
+     <linearGradient id="tile" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#fffaf5"/><stop offset=".32" stop-color="#e8c1b9"/>
+      <stop offset=".62" stop-color="#b9877f"/><stop offset="1" stop-color="#f9e5df"/>
+     </linearGradient>
+     <clipPath id="clip"><circle cx="50" cy="52" r="40"/></clipPath>
+     <pattern id="mirrorTiles" width="12" height="12" patternUnits="userSpaceOnUse">
+      <rect width="12" height="12" fill="url(#tile)"/>
+      <path d="M0 0H12V12H0Z" fill="none" stroke="#fff7f2" stroke-width="1.3"/>
+      <path d="M1 1H5V5H1Z" fill="#fff" opacity=".8"/>
+      <path d="M7 7H11V11H7Z" fill="#8f625e" opacity=".35"/>
+     </pattern>
+    </defs>
+    <path d="M50 1v9" stroke="#b58a71" stroke-width="2"/>
+    <path d="M45 7h10" stroke="#c49a7e" stroke-width="2"/>
+    <circle cx="50" cy="52" r="42" fill="#b28a82" opacity=".24"/>
+    <g clip-path="url(#clip)">
+     <circle cx="50" cy="52" r="40" fill="url(#sphere)"/>
+     <rect x="10" y="12" width="80" height="80" fill="url(#mirrorTiles)"/>
+     <path d="M10 32Q50 21 90 32M10 45Q50 39 90 45M10 59Q50 66 90 59M10 73Q50 83 90 73" fill="none" stroke="#916a65" stroke-width="1.2" opacity=".72"/>
+     <path d="M27 13Q15 52 27 91M39 12Q31 52 39 92M51 12V92M63 12Q71 52 63 92M75 13Q87 52 75 91" fill="none" stroke="#fff5f0" stroke-width="1.4" opacity=".9"/>
+     <ellipse cx="34" cy="25" rx="19" ry="8" fill="#fff" opacity=".5" transform="rotate(-27 34 25)"/>
+     <path d="M13 53Q50 43 87 53" stroke="#fff" stroke-width="1.4" opacity=".7" fill="none"/>
+    </g>
+    <circle cx="50" cy="52" r="40" fill="none" stroke="#fbe9e3" stroke-width="2"/>
+    <path d="M24 19Q40 8 57 13" fill="none" stroke="#fff" stroke-width="2.5" stroke-linecap="round" opacity=".85"/>
+   </svg>
+  </div>
+  <span class="sparkle a">✦</span><span class="sparkle b">✧</span><span class="sparkle c">✦</span>
+
+  <div class="events">
+   <section class="event" style="--i:0" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <g stroke="#a87a70" stroke-width="1.35">
+       <path d="M17 13l15 3-5 29c-1 8-5 13-10 12-5-1-7-7-5-15l5-29Z" fill="#f7e8e1"/>
+       <path d="M18 20l12 2M14 37l15 3M20 57l-3 12M10 70l16 2"/>
+       <path d="M47 15l15-3 8 29c2 8 0 14-5 15-5 1-9-4-11-12l-7-29Z" fill="#f5dfd7"/>
+       <path d="M49 22l12-2M52 40l15-3M61 56l3 13M57 72l16-2"/>
+      </g>
+      <path d="M13 48c-9-9-15 3-4 6-10 5-1 12 5 4 5 8 14 1 5-4 11-3 5-14-6-6Z" fill="#e8a5b1" stroke="#d58b9b" stroke-width="1.2"/>
+      <path d="M15 54l-3 15M17 55l8 12" stroke="#d58b9b" stroke-width="2"/>
+      <path d="M36 8l2-4m7 9 4-3m-18 2-3-4" stroke="#d9a4ad" stroke-width="1.5"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Recepción</h2><p class="time">7:00 p.m.</p></div>
+   </section>
+
+   <section class="event" style="--i:1" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M29 8l-8 5 5 13-15 35c-2 5 1 9 7 9h43c6 0 9-4 7-9L53 26l5-13-8-5-7 10H36L29 8Z" fill="#f7e2df" stroke="#c78e88" stroke-width="1.4"/>
+      <path d="M26 26h28M25 31l-8 27M55 31l8 27M40 19v50M32 22l8 9 8-9" stroke="#d9a49d" stroke-width="1.1"/>
+      <path d="M31 19c-8 7-8 12-3 16l12 7 12-7c5-4 5-9-3-16l-9 6-9-6Z" fill="#e8a5b1" stroke="#cf8e9c" stroke-width="1.2"/>
+      <path d="M38 42l-8 18m12-18 8 18" stroke="#fff8f4" stroke-width="1.4"/>
+      <path d="M12 23l-3 3m59-3 3 3M16 17l-2-3m52 3 2-3" stroke="#d9a4ad" stroke-width="1.5"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Entrada Triunfal</h2><p class="time">8:00 p.m.</p></div>
+   </section>
+
+   <section class="event" style="--i:2" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M28 16c-6-7-14-1-11 8l12 35c2 6 7 8 11 5 4-2 3-8 0-14L28 16Z" fill="#f5dfd9" stroke="#b8867d" stroke-width="1.4"/>
+      <path d="M51 15c6-7 14-1 11 8L50 58c-2 6-7 8-11 5-4-2-3-8 0-14l12-34Z" fill="#f8e8e3" stroke="#b8867d" stroke-width="1.4"/>
+      <path d="M21 34l13-4M46 30l13 4" stroke="#fff" stroke-width="1.5"/>
+      <path d="M39 17c-9-10-16 1-5 6-11 5-1 13 5 5 7 8 16 0 5-5 11-5 4-16-5-6Z" fill="#e5a0ad" stroke="#cf8798" stroke-width="1.2"/>
+      <path d="M38 24 29 42 27 62M42 24l10 17 8 10" stroke="#d38f9d" stroke-width="1.8"/>
+      <path d="M11 23l-2 4m60 2 3 3M17 13l-2-3m47 2 3-3" stroke="#d9a4ad" stroke-width="1.5"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Vals y Brindis</h2><p class="time">8:30 p.m.</p></div>
+   </section>
+
+   <section class="event" style="--i:3" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M16 29h48v33H16z" fill="#f8eae5" stroke="#bd8c6a" stroke-width="1.4"/>
+      <path d="M12 24h56v7H12z" fill="#f1d6c4" stroke="#bd8c6a" stroke-width="1.4"/>
+      <path d="M21 24V17h38v7" stroke="#bd8c6a" stroke-width="1.4"/>
+      <ellipse cx="40" cy="44" rx="16" ry="12" fill="#fffaf7" stroke="#d8b6a4" stroke-width="1.2"/>
+      <ellipse cx="40" cy="44" rx="12" ry="8" stroke="#e4c9bd" stroke-width="1"/>
+      <path d="M15 36l-4 21m4-21 4 21M11 42h8M12 37v5m5-5v5M64 36l4 21m-4-21-4 21" stroke="#b98a69" stroke-width="1.4"/>
+      <path d="M39 36c-8-8-14 2-4 5-9 4-1 10 4 4 6 6 13-1 4-4 10-4 3-13-4-5Z" fill="#e5a0ad" stroke="#cf8798" stroke-width="1.1"/>
+      <path d="M39 44l-7 15m10-15 7 15" stroke="#cf8798" stroke-width="1.7"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Banquete</h2><p class="time">9:00 p.m.</p></div>
+   </section>
+
+   <section class="event" style="--i:4" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="40" cy="40" r="27" fill="#f5e1dc" stroke="#b98278" stroke-width="1.4"/>
+      <circle cx="40" cy="40" r="22" fill="none" stroke="#d6a69d" stroke-width="1.2"/>
+      <path d="M40 13v54M13 40h54M21 21l38 38M59 21 21 59M29 15l-3 51M51 15l3 51M15 29l50 22M15 51l50-22" stroke="#fff8f3" stroke-width="1.4"/>
+      <path d="M40 8v-4m-7 6-2-4m16 4 2-4" stroke="#d9a4ad" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="3" fill="#fff" stroke="#b98278" stroke-width="1"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Fiesta Disco</h2><p class="time">10:00 p.m.</p></div>
+   </section>
+
+   <section class="event" style="--i:5" data-stop>
+    <div class="iconbox">
+     <svg viewBox="0 0 80 80" fill="none" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <circle cx="40" cy="40" r="27" fill="#e6c8c0" stroke="#aa8179" stroke-width="1.5"/>
+      <circle cx="40" cy="40" r="22" fill="none" stroke="#f9eee9" stroke-width="1.2"/>
+      <circle cx="40" cy="40" r="6" fill="#fff7f2" stroke="#b48a80" stroke-width="1.2"/>
+      <circle cx="40" cy="40" r="2" fill="#c89b91"/>
+      <path d="M40 14a26 26 0 0 1 25 19M15 45a26 26 0 0 0 22 22M20 23a26 26 0 0 1 12-8M45 65a26 26 0 0 0 18-13" stroke="#fff" stroke-width="2" opacity=".85"/>
+      <path d="M24 36c-9-10-16 1-5 6-11 5-1 13 5 5 7 8 16 0 5-5 11-5 4-16-5-6Z" fill="#e5a0ad" stroke="#cf8798" stroke-width="1.2"/>
+      <path d="M24 44 17 62m10-18 8 17" stroke="#cf8798" stroke-width="2"/>
+      <path d="M67 16l2-4m-8-3 1-4M10 59l-4 1" stroke="#d9a4ad" stroke-width="1.5"/>
+     </svg>
+    </div>
+    <span class="marker"></span>
+    <div class="copy"><h2 class="name">Fin del evento</h2><p class="time">1:00 a.m.</p></div>
+   </section>
+  </div>
+ </div>
+</main>
+<script>
+(() => {
+  const timeline = document.getElementById('timeline');
+  const disco = document.getElementById('disco');
+  const events = [...timeline.querySelectorAll('[data-stop]')];
+  let cancelled = false;
+
+  const wait = (ms) => new Promise(resolve => setTimeout(resolve, ms));
+  const centerY = (element) => {
+    const base = timeline.getBoundingClientRect();
+    const rect = element.getBoundingClientRect();
+    return rect.top - base.top + rect.height / 2;
+  };
+
+  async function runDisco() {
+    while (!cancelled) {
+      for (let i = 0; i < events.length; i++) {
+        if (cancelled) return;
+        const marker = events[i].querySelector('.marker');
+        const y = centerY(marker);
+        disco.style.transition = i === 0 ? 'none' : 'top 650ms cubic-bezier(.4,0,.2,1)';
+        disco.style.top = `${y}px`;
+        await wait(2000); // La bola permanece en cada horario durante 2 segundos
+      }
+      await wait(500);
+      // Regresa suavemente al inicio para repetir el recorrido.
+      disco.style.transition = 'top 800ms ease-in-out';
+      disco.style.top = `${centerY(events[0].querySelector('.marker'))}px`;
+      await wait(850);
+    }
+  }
+
+  window.addEventListener('resize', () => {
+    // El siguiente ciclo vuelve a calcular las posiciones según el tamaño de pantalla.
+  });
+  runDisco();
+})();
+</script>
+</body>
+</html>
